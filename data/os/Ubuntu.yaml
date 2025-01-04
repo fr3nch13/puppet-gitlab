@@ -14,3 +14,10 @@ gitlab::repository_configuration:
       key:
         name: 'gitlab_ee.asc'
         source: 'https://packages.gitlab.com/gpg.key'
+    "gitlab_official_fips":
+      comment: 'Official repository for GitLab Omnibus'
+      location: "https://packages.gitlab.com/gitlab/gitlab-fips/ubuntu"
+      key:
+        name: 'gitlab_fips.asc'
+        source: 'https://packages.gitlab.com/gpg.key'
+

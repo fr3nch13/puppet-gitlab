@@ -23,3 +23,13 @@ gitlab::repository_configuration:
       gpgcheck: 1
       repo_gpgcheck: 1
       sslverify: 1
+    "gitlab_official_fips":
+      ensure: 'present'
+      descr: 'gitlab-fips'
+      assumeyes: true
+      enabled: 1
+      baseurl: "https://packages.gitlab.com/gitlab/gitlab-fips/el/%{facts.os.release.major}/$basearch"
+      gpgkey: "https://packages.gitlab.com/gitlab/gitlab-fips/gpgkey https://packages.gitlab.com/gitlab/gitlab-fips/gpgkey/gitlab-gitlab-fips-3D645A26AB9FBD22.pub.gpg"
+      gpgcheck: 1
+      repo_gpgcheck: 1
+      sslverify: 1
