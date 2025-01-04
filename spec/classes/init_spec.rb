@@ -78,24 +78,24 @@ describe 'gitlab', type: :class do
           end
 
           it {
-            is_expected.to contain_exec('gitlab_reconfigure'). \
-              that_notifies('Service[gitlab-runsvdir]')
+            is_expected.to contain_exec('gitlab_reconfigure') \
+              .that_notifies('Service[gitlab-runsvdir]')
           }
         end
         describe 'external_url' do
           let(:params) { { external_url: 'http://gitlab.mycompany.com/' } }
 
           it {
-            is_expected.to contain_file('/etc/gitlab/gitlab.rb'). \
-              with_content(%r{^\s*external_url 'http:\/\/gitlab\.mycompany\.com\/'$})
+            is_expected.to contain_file('/etc/gitlab/gitlab.rb') \
+              .with_content(%r{^\s*external_url 'http:\/\/gitlab\.mycompany\.com\/'$})
           }
         end
         describe 'external_port' do
           let(:params) { { external_port: 9654 } }
 
           it {
-            is_expected.to contain_file('/etc/gitlab/gitlab.rb'). \
-              with_content(%r{^\s*external_port '9654'$})
+            is_expected.to contain_file('/etc/gitlab/gitlab.rb') \
+              .with_content(%r{^\s*external_port '9654'$})
           }
         end
         describe 'nginx' do
@@ -107,9 +107,9 @@ describe 'gitlab', type: :class do
           end
 
           it {
-            is_expected.to contain_file('/etc/gitlab/gitlab.rb'). \
-              with_content(%r{^\s*nginx\['enable'\] = true$}).
-              with_content(%r{^\s*nginx\['listen_port'\] = ('|)80('|)$})
+            is_expected.to contain_file('/etc/gitlab/gitlab.rb') \
+              .with_content(%r{^\s*nginx\['enable'\] = true$})
+              .with_content(%r{^\s*nginx\['listen_port'\] = ('|)80('|)$})
           }
         end
         describe 'alertmanager' do
@@ -121,9 +121,9 @@ describe 'gitlab', type: :class do
           end
 
           it {
-            is_expected.to contain_file('/etc/gitlab/gitlab.rb'). \
-              with_content(%r{^\s*alertmanager\['enable'\] = true$}).
-              with_content(%r{^\s*alertmanager\['flags'\] = {\"cluster.advertise-address\"=>\"127.0.0.1:9093\"}$})
+            is_expected.to contain_file('/etc/gitlab/gitlab.rb') \
+              .with_content(%r{^\s*alertmanager\['enable'\] = true$})
+              .with_content(%r{^\s*alertmanager\['flags'\] = {\"cluster.advertise-address\"=>\"127.0.0.1:9093\"}$})
           }
         end
         describe 'letsencrypt' do
@@ -135,9 +135,9 @@ describe 'gitlab', type: :class do
           end
 
           it {
-            is_expected.to contain_file('/etc/gitlab/gitlab.rb'). \
-              with_content(%r{^\s*letsencrypt\['enable'\] = true$}).
-              with_content(%r{^\s*letsencrypt\['contact_emails'\] = \["test@example.com"\]$})
+            is_expected.to contain_file('/etc/gitlab/gitlab.rb') \
+              .with_content(%r{^\s*letsencrypt\['enable'\] = true$})
+              .with_content(%r{^\s*letsencrypt\['contact_emails'\] = \["test@example.com"\]$})
           }
         end
         describe 'package' do
@@ -149,9 +149,9 @@ describe 'gitlab', type: :class do
           end
 
           it {
-            is_expected.to contain_file('/etc/gitlab/gitlab.rb'). \
-              with_content(%r{^\s*package\['systemd_after'\] = "foo.target"$}).
-              with_content(%r{^\s*package\['systemd_wanted_by'\] = "bar.target"$})
+            is_expected.to contain_file('/etc/gitlab/gitlab.rb') \
+              .with_content(%r{^\s*package\['systemd_after'\] = "foo.target"$})
+              .with_content(%r{^\s*package\['systemd_wanted_by'\] = "bar.target"$})
           }
         end
         describe 'consul' do
@@ -162,8 +162,8 @@ describe 'gitlab', type: :class do
           end
 
           it {
-            is_expected.to contain_file('/etc/gitlab/gitlab.rb'). \
-              with_content(%r{^\s*consul\['enable'\] = true$})
+            is_expected.to contain_file('/etc/gitlab/gitlab.rb') \
+              .with_content(%r{^\s*consul\['enable'\] = true$})
           }
         end
         describe 'pgbouncer' do
@@ -174,8 +174,8 @@ describe 'gitlab', type: :class do
           end
 
           it {
-            is_expected.to contain_file('/etc/gitlab/gitlab.rb'). \
-              with_content(%r{^\s*pgbouncer\['enable'\] = true$})
+            is_expected.to contain_file('/etc/gitlab/gitlab.rb') \
+              .with_content(%r{^\s*pgbouncer\['enable'\] = true$})
           }
         end
         describe 'praefect' do
@@ -195,16 +195,16 @@ describe 'gitlab', type: :class do
           end
 
           it {
-            is_expected.to contain_file('/etc/gitlab/gitlab.rb'). \
-              with_content(%r{^\s*praefect\['enable'\] = true$})
+            is_expected.to contain_file('/etc/gitlab/gitlab.rb') \
+              .with_content(%r{^\s*praefect\['enable'\] = true$})
           }
           it {
-            is_expected.to contain_file('/etc/gitlab/gitlab.rb'). \
-              with_content(%r{^\s*praefect\['listen_addr'\] = "0\.0\.0\.0:2305"$})
+            is_expected.to contain_file('/etc/gitlab/gitlab.rb') \
+              .with_content(%r{^\s*praefect\['listen_addr'\] = "0\.0\.0\.0:2305"$})
           }
           it {
-            is_expected.to contain_file('/etc/gitlab/gitlab.rb'). \
-              with_content(%r{^\s*praefect\['virtual_storage'\] = \{"default"=>\{"host01"=>\{"address"=>"tcp://host01:8075", "token"=>"xxx-xxx-xxx"\}, "host02"=>\{"address"=>"tcp://host02:8075", "token"=>"xxx-xxx-xxx"\}\}\}$})
+            is_expected.to contain_file('/etc/gitlab/gitlab.rb') \
+              .with_content(%r{^\s*praefect\['virtual_storage'\] = \{"default"=>\{"host01"=>\{"address"=>"tcp://host01:8075", "token"=>"xxx-xxx-xxx"\}, "host02"=>\{"address"=>"tcp://host02:8075", "token"=>"xxx-xxx-xxx"\}\}\}$})
           }
         end
         describe 'repmgr' do
@@ -215,8 +215,8 @@ describe 'gitlab', type: :class do
           end
 
           it {
-            is_expected.to contain_file('/etc/gitlab/gitlab.rb'). \
-              with_content(%r{^\s*repmgr\['enable'\] = true$})
+            is_expected.to contain_file('/etc/gitlab/gitlab.rb') \
+              .with_content(%r{^\s*repmgr\['enable'\] = true$})
           }
         end
         describe 'skip_auto_reconfigure' do
@@ -227,7 +227,7 @@ describe 'gitlab', type: :class do
               'ensure' => 'present',
               'owner' => 'root',
               'group' => 'root',
-              'mode' => '0644'
+              'mode' => '0644',
             )
           }
         end
@@ -262,9 +262,9 @@ describe 'gitlab', type: :class do
                   'ensure' => 'present',
                   'path' => '/home/gitlab-consul/.pgpass',
                   'owner' => 'gitlab-consul',
-                  'group' => 'gitlab-consul'
+                  'group' => 'gitlab-consul',
                 ).with_content(
-                  %r{^127.0.0.1:\*:pgbouncer:pgbouncer:PAsswd}
+                  %r{^127.0.0.1:\*:pgbouncer:pgbouncer:PAsswd},
                 )
               }
             end
@@ -296,7 +296,7 @@ describe 'gitlab', type: :class do
                   'app_id' => 'YOUR APP ID',
                   'app_secret' => 'YOUR APP SECRET',
                   'args' => { 'access_type' => 'offline', 'approval_prompt' => '' }
-                }
+                },
               ]
             } }
           end
@@ -307,10 +307,10 @@ describe 'gitlab', type: :class do
           end
 
           it {
-            is_expected.to contain_file('/etc/gitlab/gitlab.rb'). \
-              with_content(%r{^\s*gitlab_rails\['ldap_enabled'\] = true$}).
-              with_content(%r{\s*#{Regexp.quote(expected_content[:gitlab_rb__ldap_servers])}}m).
-              with_content(%r{^\s*gitlab_rails\['omniauth_providers'\] = \[{\"app_id\"=>\"YOUR APP ID\", \"app_secret\"=>\"YOUR APP SECRET\", \"args\"=>{\"access_type\"=>\"offline\", \"approval_prompt\"=>\"\"}, \"name\"=>\"google_oauth2\"}\]$})
+            is_expected.to contain_file('/etc/gitlab/gitlab.rb') \
+              .with_content(%r{^\s*gitlab_rails\['ldap_enabled'\] = true$})
+              .with_content(%r{\s*#{Regexp.quote(expected_content[:gitlab_rb__ldap_servers])}}m)
+              .with_content(%r{^\s*gitlab_rails\['omniauth_providers'\] = \[{\"app_id\"=>\"YOUR APP ID\", \"app_secret\"=>\"YOUR APP SECRET\", \"args\"=>{\"access_type\"=>\"offline\", \"approval_prompt\"=>\"\"}, \"name\"=>\"google_oauth2\"}\]$})
           }
         end
         describe 'gitlab_git_http_server with hash value' do
@@ -321,8 +321,8 @@ describe 'gitlab', type: :class do
           end
 
           it {
-            is_expected.to contain_file('/etc/gitlab/gitlab.rb'). \
-              with_content(%r{^\s*gitlab_git_http_server\['enable'\] = true$})
+            is_expected.to contain_file('/etc/gitlab/gitlab.rb') \
+              .with_content(%r{^\s*gitlab_git_http_server\['enable'\] = true$})
           }
         end
         describe 'gitlab_rails with string value' do
@@ -333,8 +333,8 @@ describe 'gitlab', type: :class do
           end
 
           it {
-            is_expected.to contain_file('/etc/gitlab/gitlab.rb'). \
-              with_content(%r{^\s*gitlab_rails\['backup_path'\] = "\/opt\/gitlab_backup"$})
+            is_expected.to contain_file('/etc/gitlab/gitlab.rb') \
+              .with_content(%r{^\s*gitlab_rails\['backup_path'\] = "\/opt\/gitlab_backup"$})
           }
         end
         describe 'rack_attack_git_basic_auth with Numbers and Strings' do
@@ -353,16 +353,16 @@ describe 'gitlab', type: :class do
           end
 
           it {
-            is_expected.to contain_file('/etc/gitlab/gitlab.rb'). \
-              with_content(%r{^\s*gitlab_rails\['rack_attack_git_basic_auth'\] = {\"bantime\"=>3600, \"enable\"=>true, \"findtime\"=>60, \"ip_whitelist\"=>\[\"127.0.0.1\", \"10.0.0.0\"\], \"maxretry\"=>10}$})
+            is_expected.to contain_file('/etc/gitlab/gitlab.rb') \
+              .with_content(%r{^\s*gitlab_rails\['rack_attack_git_basic_auth'\] = {\"bantime\"=>3600, \"enable\"=>true, \"findtime\"=>60, \"ip_whitelist\"=>\[\"127.0.0.1\", \"10.0.0.0\"\], \"maxretry\"=>10}$})
           }
         end
         describe 'mattermost external URL' do
           let(:params) { { mattermost_external_url: 'https://mattermost.myserver.tld' } }
 
           it {
-            is_expected.to contain_file('/etc/gitlab/gitlab.rb'). \
-              with_content(%r{^\s*mattermost_external_url 'https:\/\/mattermost\.myserver\.tld'$})
+            is_expected.to contain_file('/etc/gitlab/gitlab.rb') \
+              .with_content(%r{^\s*mattermost_external_url 'https:\/\/mattermost\.myserver\.tld'$})
           }
         end
         describe 'mattermost with hash value' do
@@ -373,14 +373,14 @@ describe 'gitlab', type: :class do
           end
 
           it {
-            is_expected.to contain_file('/etc/gitlab/gitlab.rb'). \
-              with_content(%r{^\s*mattermost\['enable'\] = true$})
+            is_expected.to contain_file('/etc/gitlab/gitlab.rb') \
+              .with_content(%r{^\s*mattermost\['enable'\] = true$})
           }
         end
         describe 'with roles' do
           let(:params) do
             {
-              'roles' => %w[redis_sentinel_role redis_master_role]
+              'roles' => ['redis_sentinel_role', 'redis_master_role']
             }
           end
 
@@ -391,8 +391,8 @@ describe 'gitlab', type: :class do
           end
 
           it {
-            is_expected.to contain_file('/etc/gitlab/gitlab.rb').
-              with_content(%r{\s*#{Regexp.quote(expected_content[:roles])}}m)
+            is_expected.to contain_file('/etc/gitlab/gitlab.rb')
+              .with_content(%r{\s*#{Regexp.quote(expected_content[:roles])}}m)
           }
         end
         describe 'with data_dirs' do
@@ -412,8 +412,8 @@ describe 'gitlab', type: :class do
           end
 
           it do
-            is_expected.to contain_file('/etc/gitlab/gitlab.rb').
-              with_content(%r{\s*#{Regexp.quote(expected_content[:datadirs])}}m)
+            is_expected.to contain_file('/etc/gitlab/gitlab.rb')
+              .with_content(%r{\s*#{Regexp.quote(expected_content[:datadirs])}}m)
           end
         end
         describe 'with store_git_keys_in_db' do
@@ -431,8 +431,8 @@ describe 'gitlab', type: :class do
           end
 
           it {
-            is_expected.to contain_file('/etc/gitlab/gitlab.rb'). \
-              with_content(%r{^\s*gitlab_monitor\['enable'\] = true$})
+            is_expected.to contain_file('/etc/gitlab/gitlab.rb') \
+              .with_content(%r{^\s*gitlab_monitor\['enable'\] = true$})
           }
           it {
             is_expected.to contain_notify("DEPRECTATION: 'gitlab_monitor' is deprecated if using GitLab 12.3 or greater. Set 'gitlab_exporter' instead")
@@ -446,8 +446,8 @@ describe 'gitlab', type: :class do
           end
 
           it {
-            is_expected.to contain_file('/etc/gitlab/gitlab.rb'). \
-              with_content(%r{^\s*gitlab_exporter\['enable'\] = true$})
+            is_expected.to contain_file('/etc/gitlab/gitlab.rb') \
+              .with_content(%r{^\s*gitlab_exporter\['enable'\] = true$})
           }
         end
         describe 'puma' do
@@ -460,10 +460,10 @@ describe 'gitlab', type: :class do
           end
 
           it {
-            is_expected.to contain_file('/etc/gitlab/gitlab.rb').
-              with_content(%r{^\s*puma\['enable'\] = true$}).
-              with_content(%r{^\s*puma\['worker_processes'\] = 3$}).
-              with_content(%r{^\s*puma\['worker_timeout'\] = 60$})
+            is_expected.to contain_file('/etc/gitlab/gitlab.rb')
+              .with_content(%r{^\s*puma\['enable'\] = true$})
+              .with_content(%r{^\s*puma\['worker_processes'\] = 3$})
+              .with_content(%r{^\s*puma\['worker_timeout'\] = 60$})
           }
         end
         describe 'pgbouncer_exporter' do
@@ -474,8 +474,8 @@ describe 'gitlab', type: :class do
           end
 
           it {
-            is_expected.to contain_file('/etc/gitlab/gitlab.rb'). \
-              with_content(%r{^\s*pgbouncer_exporter\['enable'\] = true$})
+            is_expected.to contain_file('/etc/gitlab/gitlab.rb') \
+              .with_content(%r{^\s*pgbouncer_exporter\['enable'\] = true$})
           }
         end
         describe 'geo_logcursor' do
@@ -486,8 +486,8 @@ describe 'gitlab', type: :class do
           end
 
           it {
-            is_expected.to contain_file('/etc/gitlab/gitlab.rb'). \
-              with_content(%r{^\s*geo_logcursor\['enable'\] = true$})
+            is_expected.to contain_file('/etc/gitlab/gitlab.rb') \
+              .with_content(%r{^\s*geo_logcursor\['enable'\] = true$})
           }
         end
         describe 'gitlab_sshd' do
@@ -498,8 +498,8 @@ describe 'gitlab', type: :class do
           end
 
           it {
-            is_expected.to contain_file('/etc/gitlab/gitlab.rb'). \
-              with_content(%r{^\s*gitlab_sshd\['enable'\] = true$})
+            is_expected.to contain_file('/etc/gitlab/gitlab.rb') \
+              .with_content(%r{^\s*gitlab_sshd\['enable'\] = true$})
           }
         end
         describe 'package_hold' do

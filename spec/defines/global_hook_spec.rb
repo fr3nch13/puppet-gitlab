@@ -25,14 +25,14 @@ describe 'gitlab::global_hook' do
       it { is_expected.to compile }
 
       it do
-        is_expected.to contain_file("/custom/hooks/dir/#{type}.d").
-          with_ensure('directory')
+        is_expected.to contain_file("/custom/hooks/dir/#{type}.d")
+          .with_ensure('directory')
       end
 
       it do
-        is_expected.to contain_file("/custom/hooks/dir/#{type}.d/#{title}").
-          with_ensure('file').
-          with_source(source)
+        is_expected.to contain_file("/custom/hooks/dir/#{type}.d/#{title}")
+          .with_ensure('file')
+          .with_source(source)
       end
     end
 
@@ -49,14 +49,14 @@ describe 'gitlab::global_hook' do
       it { is_expected.to compile }
 
       it do
-        is_expected.to contain_file("/custom/hooks/dir/#{type}.d").
-          with_ensure('directory')
+        is_expected.to contain_file("/custom/hooks/dir/#{type}.d")
+          .with_ensure('directory')
       end
 
       it do
-        is_expected.to contain_file("/custom/hooks/dir/#{type}.d/#{title}").
-          with_ensure('file').
-          with_content(content)
+        is_expected.to contain_file("/custom/hooks/dir/#{type}.d/#{title}")
+          .with_ensure('file')
+          .with_content(content)
       end
     end
   end
