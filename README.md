@@ -68,7 +68,7 @@ support gitlab-omnibus 7.10, and may be unstable even then.
 ### What GitLab affects
 
 * Package repository (APT or YUM)
-* Omnibus gitlab package, typically `gitlab-ce` or `gitlab-ee`
+* Omnibus gitlab package, typically `gitlab-ce`, `gitlab-ee`, or `gitlab-fips`
 * Configuration file `/etc/gitlab/gitlab.rb`
 * System service `gitlab-runsvdir`
 * GitLab configuration using `gitlab-ctl reconfigure`
@@ -230,9 +230,9 @@ the `Package` resource type. Default is `installed`. This value works with the
 `package_name` parameter to install the correct package.
 
 If you are using upstream package source, the package name automatically
-switches between `gitlab-ce` and `gitlab-ee` depending on the value you have
-provided to `manage_upstream_edition`. If `manage_upstream_edition` is set to
-`disabled`, you will need to provide the appropriate value to `package_name`
+switches between `gitlab-ce`, `gitlab-ee` and `gitlab-fips` depending on the value
+you have provided to `manage_upstream_edition`. If `manage_upstream_edition` is set
+to `disabled`, you will need to provide the appropriate value to `package_name`
 yourself.
 
 This approach of package management has the following advantages:
